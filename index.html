@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Poornima A E Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout concept: a component datasheet. Mono labels, spec tables, one green accent with a copper secondary for pin-style marks. */
+:root {
+  --bg: #F3F5F2;
+  --surface: #FFFFFF;
+  --ink: #14201B;
+  --muted: #55645D;
+  --line: #CBD3CE;
+  --accent: #0B6B4F;
+  --accent-ink: #FFFFFF;
+  --copper: #9A5214;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1613;
+    --surface: #151E1A;
+    --ink: #E4ECE7;
+    --muted: #9AABA2;
+    --line: #2A3832;
+    --accent: #5BCB9E;
+    --accent-ink: #0B1511;
+    --copper: #E3A066;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1613;
+  --surface: #151E1A;
+  --ink: #E4ECE7;
+  --muted: #9AABA2;
+  --line: #2A3832;
+  --accent: #5BCB9E;
+  --accent-ink: #0B1511;
+  --copper: #E3A066;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-block: 40px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.page { max-width: 960px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+h1, h2, h3, p, ul, dl, dd { margin: 0; padding: 0; }
+ul { list-style: none; }
+
+.mono { font-family: var(--font-mono); }
+.label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Header */
+.top { display: flex; flex-direction: column; gap: 24px; }
+.partno { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+h1 {
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.role { font-size: clamp(1.05rem, 2.4vw, 1.3rem); color: var(--muted); max-width: 40ch; text-wrap: balance; }
+.intro { max-width: 62ch; }
+.specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.specs div { padding: 14px 16px 14px 0; min-width: 0; }
+.specs dd { font-weight: 500; margin-top: 2px; overflow-wrap: anywhere; }
+.links { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.btn {
+  display: inline-block;
+  padding: 10px 18px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 15px;
+  cursor: pointer;
+}
+.btn:hover { background: var(--ink); color: var(--bg); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.08); background: var(--accent); color: var(--accent-ink); }
+.email { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.email code {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  user-select: all;
+  -webkit-user-select: all;
+  overflow-wrap: anywhere;
+}
+
+/* Sections */
+section { display: flex; flex-direction: column; gap: 20px; }
+h2 {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--copper);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; text-wrap: balance; }
+
+.entry { display: flex; flex-direction: column; gap: 12px; }
+.entry-head { display: flex; flex-wrap: wrap; gap: 4px 16px; justify-content: space-between; align-items: baseline; }
+.entry-head .label { white-space: nowrap; }
+.sub { color: var(--muted); }
+.bullets { display: flex; flex-direction: column; gap: 8px; }
+.bullets li { position: relative; padding-left: 22px; max-width: 74ch; }
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.78em;
+  width: 10px;
+  height: 2px;
+  background: var(--copper);
+}
+
+/* Projects */
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+.card.wide { grid-column: 1 / -1; }
+.card-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 12px; align-items: flex-start; }
+.pill {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 99px;
+  padding: 2px 10px;
+  white-space: nowrap;
+}
+.kv { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 6px 14px; font-size: 14.5px; border-top: 1px solid var(--line); padding-top: 12px; }
+.kv dt { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+.kv dd { overflow-wrap: anywhere; }
+.card p { font-size: 15px; }
+
+/* Skills and education tables */
+.rows { display: flex; flex-direction: column; }
+.row {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 4px 24px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.row:first-child { border-top: 1px solid var(--line); }
+.row dt { font-weight: 600; }
+.row dd { color: var(--ink); }
+.row .when { color: var(--muted); font-family: var(--font-mono); font-size: 13px; }
+
+footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; border-top: 2px solid var(--ink); padding-top: 14px; }
+
+@media (max-width: 720px) {
+  .projects { grid-template-columns: minmax(0, 1fr); }
+  .row { grid-template-columns: minmax(0, 1fr); }
+  .kv { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .kv dt { padding-top: 8px; }
+  .page { gap: 44px; }
+  body { padding-block: 28px 44px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+</head>
+<body>
+<div class="page">
+
+  <header class="top">
+    <div class="partno label"><span>Embedded Linux</span><span>Kernel</span><span>Firmware</span></div>
+    <h1>Poornima A E</h1>
+    <p class="role">Embedded and Linux kernel engineer, 2026 graduate, Bengaluru</p>
+    <p class="intro">I work where Linux meets hardware. I trace system calls through the kernel, debug custom kernel builds under QEMU and GDB, and write C firmware for ESP32 sensors. I am looking for a first role in embedded, firmware or Linux kernel engineering.</p>
+    <dl class="specs">
+      <div><dt class="label">Focus</dt><dd>Kernel internals, firmware</dd></div>
+      <div><dt class="label">Degree</dt><dd>B.E. Electronics and Communication, 2026</dd></div>
+      <div><dt class="label">CGPA</dt><dd class="mono">8.5 / 10</dd></div>
+      <div><dt class="label">Languages</dt><dd>C, Python</dd></div>
+    </dl>
+    <div class="links">
+      <a class="btn primary" href="https://github.com/POO2004" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/poornima-a-e-615785326/" target="_blank" rel="noopener">LinkedIn</a>
+      <span class="email"><code id="mail">poornimaae24@gmail.com</code><button class="btn" id="copy" type="button">Copy email</button></span>
+    </div>
+  </header>
+
+  <section id="experience">
+    <h2>Experience</h2>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3>Embedded Software Engineer, Intern</h3>
+        <span class="label">May 2026 to Sep 2026</span>
+      </div>
+      <p class="sub">Linux Kernel Foundation, Master Linux Kernel &amp; LDD Program. Bengaluru, on-site.</p>
+      <ul class="bullets">
+        <li>Traced <span class="mono">fork()</span>, <span class="mono">pipe()</span>, <span class="mono">pthread_create()</span> and <span class="mono">pthread_detach()</span> through a custom kernel build with QEMU and GDB, checking system call ABI behavior at the register level (<span class="mono">pt_regs</span>) against Bootlin's Elixir source browser.</li>
+        <li>Measured system call overhead with <span class="mono">strace</span>: 38 syscalls for a C program against 479 for the equivalent Python program.</li>
+        <li>Followed C runtime startup with <span class="mono">objdump</span> and <span class="mono">readelf</span>, from <span class="mono">_start</span> through <span class="mono">__libc_start_main</span> to <span class="mono">main()</span>.</li>
+        <li>Implemented custom system calls, ran kernel module failure experiments, fixed a boot failure caused by missing NLS modules, and reproduced Kernel Bugzilla #57101 (a memory leak in <span class="mono">/proc/fs/fscache/stats</span> on Linux 3.9) under QEMU.</li>
+        <li>Benchmarked Python interpreter startup: 140+ file stat checks, <span class="mono">.pyc</span> reads and 66 signal handler registrations before user code runs.</li>
+      </ul>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3>Embedded Systems Engineer, Probationary</h3>
+        <span class="label">Early 2026, 1 month</span>
+      </div>
+      <p class="sub">Embedded systems startup.</p>
+      <ul class="bullets">
+        <li>Built a UART sensor data collection pipeline on ESP32 between sensor nodes and a host application.</li>
+        <li>Integrated I2C peripherals for sensor data acquisition and used GPIO pins for sensor triggering and status signaling.</li>
+      </ul>
+    </article>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+
+      <article class="card wide">
+        <div class="card-head">
+          <h3>DevCrew</h3>
+          <span class="pill">Contributor</span>
+        </div>
+        <p>An Embedded C agentic debugging framework, orchestrated through Claude CLI. Given a bug description and related documentation, the agent reproduces the bug in QEMU and walks a multi-step debugging pipeline, with human checkpoints for manual verification at key steps.</p>
+        <dl class="kv">
+          <dt>Stack</dt><dd>Embedded C, QEMU, Claude CLI</dd>
+          <dt>Status</dt><dd>Core pipeline works, some steps still being refined</dd>
+          <dt>Repo</dt><dd>Private, under Linux Kernel Foundation's GitHub organization</dd>
+        </dl>
+      </article>
+
+      <article class="card wide">
+        <div class="card-head">
+          <h3>Multi-Sensor Vital Signs Monitor</h3>
+          <span class="pill">Built</span>
+        </div>
+        <p>Measures heart rate, SpO2 and temperature and shows them live on a 16x2 I2C LCD and the serial monitor. Heart rate detection is written in firmware: low-pass filtering, adaptive-threshold beat detection and moving-average smoothing, cross-checked against the MAX30100's own heart rate.</p>
+        <dl class="kv">
+          <dt>MCU</dt><dd>ESP32-WROOM-32, Embedded C/C++ (Arduino framework)</dd>
+          <dt>Sensors</dt><dd>HBT-V2 pulse sensor on the ADC, MAX30100 over I2C, 10 kΩ NTC thermistor (Beta equation, averaging, open-circuit detection)</dd>
+          <dt>Bus</dt><dd>Both ESP32 I2C buses, with a custom PCF8574 LCD driver to keep the LCD and sensor on separate buses</dd>
+          <dt>Debug</dt><dd>An I2C scanner and a part-ID register read showed the module labelled MAX30100/30102 contains a MAX30100, so I switched to the correct driver library</dd>
+        </dl>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Robotic Eyes Display</h3>
+          <span class="pill">In progress</span>
+        </div>
+        <p>Animated robotic eyes on an OLED display, driven directly from the microcontroller.</p>
+        <dl class="kv">
+          <dt>MCU</dt><dd>ESP32-C3 Super Mini</dd>
+          <dt>Language</dt><dd>Embedded C/C++</dd>
+        </dl>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Smart Robotic Arm</h3>
+          <span class="pill">Built</span>
+        </div>
+        <p>A mobile-app-controlled robotic arm with a record-and-replay mode. Drive a task once, and it plays back on command. The control layer is built so voice commands can be added later.</p>
+        <dl class="kv">
+          <dt>Control</dt><dd>Mobile app</dd>
+          <dt>Mode</dt><dd>Record and replay</dd>
+        </dl>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>IoT Milk Quality Testing</h3>
+          <span class="pill">Built</span>
+        </div>
+        <p>Detects milk freshness and adulteration in real time. Threshold-based classification drives a live dashboard.</p>
+        <dl class="kv">
+          <dt>Sensors</dt><dd>pH, TDS, LDR</dd>
+          <dt>Firmware</dt><dd>Arduino / NodeMCU, cloud-synced monitoring</dd>
+        </dl>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>NammaHaadi</h3>
+          <span class="pill">Built</span>
+        </div>
+        <p>An Android road-safety app with community-driven, color-coded reports of road conditions: safe, flooded, muddy. Real-time location and cloud storage support crowd-sourced data during floods and emergencies.</p>
+        <dl class="kv">
+          <dt>Stack</dt><dd>Kotlin, Google Maps SDK, Firebase</dd>
+        </dl>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <dl class="rows">
+      <div class="row"><dt>Systems and low-level</dt><dd>C, Embedded C, Linux kernel internals, ELF analysis, runtime debugging</dd></div>
+      <div class="row"><dt>Embedded and firmware</dt><dd>ESP32, ESP32-C3, Arduino, NodeMCU, UART, I2C, ADC, GPIO, sensor integration</dd></div>
+      <div class="row"><dt>Debugging</dt><dd>GDB, QEMU, strace, objdump, readelf</dd></div>
+      <div class="row"><dt>Build and tools</dt><dd>Git, GitHub, GCC, Make, CMake, Bash, Ubuntu</dd></div>
+      <div class="row"><dt>Languages</dt><dd>C, Python, Kotlin</dd></div>
+    </dl>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <dl class="rows">
+      <div class="row"><dt>B.E., Electronics and Communication Engineering</dt><dd>East West Institute of Technology, Bengaluru <span class="when">&nbsp;2022 to 2026 &middot; CGPA 8.5 / 10</span></dd></div>
+      <div class="row"><dt>PUC (KEA)</dt><dd>Poorna Prajna PU College <span class="when">&nbsp;2020 to 2022 &middot; 80%</span></dd></div>
+      <div class="row"><dt>Class 10 (KSEEB)</dt><dd>Standard English School <span class="when">&nbsp;2019 to 2020 &middot; 96%, Mathematics 100/100</span></dd></div>
+    </dl>
+  </section>
+
+  <footer class="label">
+    <span>Poornima A E &middot; Bengaluru, India</span>
+    <span>Updated November 2026</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var btn = document.getElementById("copy");
+  var code = document.getElementById("mail");
+  var text = code.textContent;
+  function selectIt() {
+    try {
+      var r = document.createRange();
+      r.selectNodeContents(code);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+    } catch (e) {}
+  }
+  btn.addEventListener("click", function () {
+    var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy email"; }, 1800); };
+    try {
+      navigator.clipboard.writeText(text).then(done, function () { selectIt(); btn.textContent = "Select and copy"; });
+    } catch (e) { selectIt(); btn.textContent = "Select and copy"; }
+  });
+})();
+</script>
+
+</body>
+</html>
